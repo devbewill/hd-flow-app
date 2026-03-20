@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "700", "900"],
+  variable: "--font-lato",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "AI Product Flow",
@@ -16,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className="h-full">
-      <body className={`${inter.className} h-full antialiased`}>{children}</body>
+      <body className={`${lato.className} h-full antialiased`}>{children}</body>
     </html>
   );
 }

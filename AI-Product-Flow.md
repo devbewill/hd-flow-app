@@ -26,48 +26,14 @@ Un team che lavora su specifiche validate, AI governata e fasi presidiate produc
 
 ---
 
-## 01. AI Governance
-**AI governata: il vero differenziale**
-
-> *Non quanti tool AI usiamo ma se producono tutti lo stesso standard.*
-
-Vogliamo che ogni developer, pm, analyst del team usi l'AI con lo stesso contesto: le nostre convenzioni, la nostra architettura, le nostre regole di sicurezza.
-
-Questo non lo otteniamo con la disciplina individuale, si ottiene con un metodo condiviso: un contesto aziendale (versionato in Git?!) e iniettato come system prompt fisso in ogni tool utilizzato dal team. L'AI smette di essere un jolly e diventa un collaboratore onnisciente che conosce tutto.
-
-### Piano di Implementazione
-1. Il team tech documenta le convenzioni implicite della codebase.
-2. Quelle convenzioni diventano `global-context.md`: un file versionato che la CI mantiene aggiornato ad ogni merge.
-3. Claude Code viene adottato come standard unico, pre-configurato con quel contesto come system prompt.
-
-### Business Impact
-Il codice generato dall'AI rispetta i nostri standard senza dipendere dalla capacità del singolo. La qualità diventa strutturale, non personale.
-
-### Toolchain
-- `global-context.md` (versionato in Git)
-- Claude Code CLI (standard unico)
-
----
-
-## 02. Il processo proposto
+## 01. L'idea di processo
 **Sette fasi. Un output per ognuna.**
 
 > *Il processo è un accordo operativo tra business e IT.*
 
 Ogni fase produce qualcosa di concreto e usabile nella successiva: un ticket qualificato, un prototipo approvato, una specifica tecnica, del codice testato. Nessun passaggio di consegne a voce, nessun "come ci eravamo detti".
 
-La forza del sistema è nei checkpoint: nessuna feature avanza senza che la fase precedente abbia prodotto il suo output. Questo sposta il controllo qualità all'inizio del processo, dove costa meno intervenire.
-
-### Le 7 Fasi
-| #   | Fase       | Output                                      |
-| --- | ---------- | ------------------------------------------- |
-| 01  | Richiesta  | Form strutturato compilato                  |
-| 02  | Triage     | Ticket qualificato con categoria e priorità |
-| 03  | Discovery  | Prototipo navigabile approvato              |
-| 04  | Planning   | Specifica tecnica + stima validata          |
-| 05  | Dev        | Spec-Driven Development                     |
-| 06  | Demo       | Ambiente che già conoscono                  |
-| 07  | Produzione | Deploy + documentazione completa archiviata |
+La forza del sistema è nei checkpoint: nessuna feature avanza senza che la fase precedente abbia prodotto il suo output.
 
 ### Piano di Implementazione
 1. Walkthrough del flow con business e IT su un caso reale che è stato oggetto di discussioni.
@@ -83,31 +49,47 @@ Chi inizia a sviluppare ha già tutto: specifica validata, prototipo approvato, 
 
 ---
 
-## 03. Context as Code
-**Delegare la memoria storica all'AI**
+## 02. Processo E2E
+**Il processo End-to-End**
 
-> *L'AI non può rispettare le nostre regole se non le conosce. La soluzione è: glielo diciamo noi, una volta sola.*
+> *Sette fasi. Un output concreto e un tag Git per ognuna.*
 
-Il **Codebase Context Registry** è un file Markdown versionato in Git che contiene architettura, pattern approvati, naming conventions e policy di sicurezza. Viene rigenerato automaticamente dalla CI a ogni merge su main e rimane sempre aggiornato e sempre disponibile.
+| # | Fase | Git Tag | Artefatti |
+|---|------|---------|-----------|
+| 1 | Richiesta | #Richiesta | Markdown con la richiesta strutturata |
+| 2 | Triage | #Triage | Markdown aggiornato con data di approvazione; PM di riferimento associato |
+| 3 | Discovery | #Discovery | Prototipo navigabile validato dal business |
+| 4 | Planning | #Planning | Markdown arricchito con stima e pianificazione; Developer di riferimento assegnati |
+| 5 | In Development | #In Development | Specifica tecnica per AI (SDD); Markdown aggiornato con data di inizio sviluppi |
+| 6 | Demo | #Demo | Demo accessibile in staging; Esito della demo registrato nel markdown |
+| 7 | Live | #Live | Markdown completo con log di tutti gli step; Cartella archiviata in SharePoint |
 
-Questo file diventa il system prompt fisso di ogni interazione AI del team. Non dipende dal dev che ricorda di specificarlo, non cambia da persona a persona. L'AI lavora sempre con il contesto completo del progetto.
+### Dettaglio fasi
 
-### Piano di Implementazione
-1. Il team passa il tempo necessario (1–2 settimane) a documentare le regole implicite della codebase nel primo `global-context.md`: error logging, best practices, design system, pattern comuni, naming conventions, security.
-2. Uno script nella CI mantiene il file sincronizzato con l'evoluzione del codice senza effort manuale, rigenerando automaticamente il file ad ogni merge su main.
-3. Il file viene configurato come system prompt obbligatorio su tutti i tool AI del team: skills su Claude, rules su Cursor, system prompt fisso ovunque.
+**#Richiesta**
+Il business compila un form strutturato sul portal con campi obbligatori: problema da risolvere, utenti impattati, obiettivo atteso, urgenza. Non è possibile inviare una richiesta incompleta.
 
-### Business Impact
-I dev interni o esterni leggono un documento invece di fare shadowing. I senior fanno code review che è più una validazione che un'ispezione alla ricerca di capire cosa stanno guardando.
+**#Triage**
+Il Product Director valuta la richiesta, assegna categoria e dimensione e nomina il PM di riferimento. Solo ciò che supera il triage entra in backlog.
 
-### Toolchain
-- Repomix (non lo so, l'ho cercato online, non è il mio campo)
-- WebHook di Bitbucket (come sopra, potrebbe essere l'equivalente delle github actions)
-- `global-context.md` (versionato in git)
+**#Discovery**
+Il PM lavora con il business per produrre una specifica funzionale e un prototipo navigabile generato con Claude. Il prototipo viene validato dal business prima che venga scritta una riga di codice.
+
+**#Planning**
+Il Tech Lead riceve il markdown iniziale, il prototipo approvato e le eventuali user story. Stima l'effort, pianifica gli sprint e assegna i developer.
+
+**#In Development**
+Alla data pianificata i developer assegnati avviano lo sviluppo. Il developer costruisce la propria specifica tecnica per l'AI partendo da tutto il materiale già prodotto nelle fasi precedenti.
+
+**#Demo**
+Demo con gli stakeholder in ambiente staging. L'esito — approvazione, feedback o richieste di modifica — viene tracciato nel markdown di riferimento.
+
+**#Live**
+Deploy in produzione. Il markdown viene completato con tutte le informazioni relative agli step precedenti, i test eseguiti e i riferimenti tecnici, poi archiviato in SharePoint.
 
 ---
 
-## 04. Richiesta e Triage
+## 03. Richiesta e Triage
 **Nessuna richiesta entra senza essere qualificata.**
 
 > *Il portale di richiesta non è un'alternativa è l'unico entry point, l'unico canale valido per avanzare una richiesta.*
@@ -117,7 +99,7 @@ Il business compila un form strutturato con campi obbligatori: problema da risol
 Il Product Director riceve le richieste, le valuta e assegna categoria e dimensione. Solo ciò che supera il triage entra in backlog.
 
 ### Piano di Implementazione
-1. Costruire il form con validazione obbligatoria lato client
+1. Costruire il form con validazione obbligatoria lato client.
 2. Collegare il form alla creazione automatica di ticket Jira via API, zero effort manuale di trascrizione.
 
 ### Business Impact
@@ -129,14 +111,14 @@ Il team riceve solo richieste che qualcuno ha già valutato e approvato. Le conv
 
 ---
 
-## 05. Discovery & Prototipazione
+## 04. Discovery & Prototipazione
 **Il Business approva qualcosa che può cliccare.**
 
 > *Non un documento da immaginare ma un prototipo navigabile da validare prima che venga scritta riga di codice da un developer.*
 
 Il PM usa Claude istruito con il Design System per generare un prototipo navigabile. Non un mockup statico: qualcosa di cliccabile che il business usa come se fosse il prodotto finito, identificando gap e correzioni prima che abbiano un costo reale di implementazione.
 
-Il prototipo approvato diventa il **Contratto Visivo**: allegato alla specifica tecnica, è il riferimento unico e immutabile per dev, QA e business per tutta la durata dello sviluppo. La validazione viene versionata con un TAG su un branch specifico, mergiato al rilascio in produzione.
+Il prototipo approvato diventa il Contratto Visivo: allegato alla specifica tecnica, è il riferimento unico e immutabile per dev, QA e business per tutta la durata dello sviluppo. La validazione viene versionata con un TAG su un branch specifico, mergiato al rilascio in produzione.
 
 ### Piano di Implementazione
 1. Un giorno di workshop pratico per formare i PM sull'uso di Claude come tool di prototipazione rapida.
@@ -152,7 +134,7 @@ Quello che il business vede prima dello sviluppo è esattamente quello che ricev
 
 ---
 
-## 06. Spec-Driven Development
+## 05. Spec-Driven Development
 **Il Dev Progetta. L'AI lo costruisce.**
 
 > *Il dev team smette di leggere requisiti e supporre. Osserva, capisce e prende decisioni architetturali su cose concrete.*
@@ -175,7 +157,7 @@ Il team tech si concentra sulle decisioni che contano senza perdere tempo a fare
 
 ---
 
-## 07. Il Progetto pilota
+## 06. Il Progetto pilota
 **Dimostrarlo prima di scalarlo.**
 
 > *Sei settimane, un team, una feature reale. I dati del pilota guidano la scalabilità.*
@@ -183,13 +165,6 @@ Il team tech si concentra sulle decisioni che contano senza perdere tempo a fare
 Il pilota non è un esperimento: è una prova di concetto controllata. Selezioniamo un team di quattro o cinque persone, una feature target e applicano il processo completo per sei settimane. Tracciando ogni fase.
 
 L'obiettivo del pilota non è la perfezione è il delta misurabile rispetto a come lavoriamo oggi. Stime sbagliate, rework, velocità di consegna. Al termine, i dati parlano da soli e la decisione di scalare diventa ovvia o informata.
-
-### Timeline
-| Settimana | Focus      | Attività                                                                                         |
-| --------- | ---------- | ------------------------------------------------------------------------------------------------ |
-| 1–3       | Setup      | Context Registry configurato, portale richieste attivo, tool AI pronti e integrati               |
-| 4–5       | Esecuzione | La feature avanza seguendo ogni fase del processo, checkpoint tracciati in tempo reale su Jira   |
-| 6         | Chiusura   | Confronto con la baseline, retrospettiva con il team, presentazione dati e next step             |
 
 ### Piano di Implementazione
 1. Settimane 1–3: Setup → Context Registry configurato, portale richieste attivo, tool AI pronti e integrati.
@@ -201,14 +176,14 @@ Se il processo funziona, abbiamo dati reali per giustificare lo scaling. Se emer
 
 ### Toolchain
 - Jira (tracking)
-- Teams → canale `#chimelohafattofare`
+- Teams → canale #chimelohafattofare
 
 ---
 
-## 08. Il ROI Atteso
+## 07. Il ROI Atteso
 **Dall'esperimento all'AHA moment.**
 
-> *Il risultato non è fare di più con meno ma è fare le cose giuste con maggior energia, in modo prevedibile, strutturato e lungimirante.*
+> *Il risultato non è fare di più con meno è fare le cose giuste con maggior energia, in modo prevedibile, strutturato e lungimirante.*
 
 Con un processo strutturato e AI contestualizzata i team smettono di lavorare su requisiti ambigui e andare per deduzioni iniziando a lavorare su specifiche validate con il minor margine di errore possibile. La differenza non è nella velocità di digitazione: è nell'effort sprecato che diminuisce perché il sistema ne genera meno.
 
@@ -222,8 +197,55 @@ Il valore più sottovalutato è la prevedibilità. Quando gli sprint vengono ris
 ### Business Impact
 Un team che opera con fasi chiare, AI governata e specifiche validate delivera meglio. L'IT diventa un asset pianificabile, non una variabile da gestire.
 
-EXTRA: Può diventare, se funziona, un caso di successo da raccontare a livello di comunicazione aziendale, un gancio potente per raccontare un'azienda che guarda avanti, che sfrutta questa rivoluzione chiamata AI per essere tra le prime del settore in Italia ad entrarci a 360 gradi nei processi di delivery interni.
+Può diventare, se funziona, un caso di successo da raccontare a livello di comunicazione aziendale, un gancio potente per raccontare un'azienda che guarda avanti, che sfrutta questa rivoluzione chiamata AI per essere tra le prime del settore in Italia ad entrarci a 360 gradi nei processi di delivery interni.
 
 ### Toolchain
 - Custom Dashboard (Next.js)
 - OKR / KPI Framework aziendale
+
+---
+
+## 08. AI Governance
+**AI governata: il vero differenziale**
+
+> *Non quanti tool AI usiamo ma se producono tutti lo stesso standard.*
+
+Vogliamo che ogni developer, pm, analyst del team usi l'AI con lo stesso contesto: le nostre convenzioni, la nostra architettura, le nostre regole di sicurezza.
+
+Questo non lo otteniamo con la disciplina individuale, si ottiene con un metodo condiviso: un contesto aziendale (versionato in Git?!) e iniettato come system prompt fisso in ogni tool utilizzato dal team. L'AI smette di essere un jolly e diventa un collaboratore onnisciente che conosce tutto.
+
+### Piano di Implementazione
+1. Il team tech documenta le convenzioni implicite della codebase.
+2. Quelle convenzioni diventano `global-context.md`: un file versionato che la CI mantiene aggiornato ad ogni merge.
+3. Claude Code viene adottato come standard unico, pre-configurato con quel contesto come system prompt.
+
+### Business Impact
+Il codice generato dall'AI rispetta i nostri standard senza dipendere dalla capacità del singolo. La qualità diventa strutturale, non personale.
+
+### Toolchain
+- `global-context.md` (versionato in Git)
+- Claude Code CLI (standard unico)
+
+---
+
+## 09. Context as Code
+**Delegare la memoria storica all'AI**
+
+> *L'AI non può rispettare le nostre regole se non le conosce. La soluzione è: glielo diciamo noi, una volta sola.*
+
+Il **Codebase Context Registry** è un file Markdown versionato in Git che contiene architettura, pattern approvati, naming conventions e policy di sicurezza. Viene rigenerato automaticamente dalla CI a ogni merge su main e rimane sempre aggiornato e sempre disponibile.
+
+Questo file diventa il system prompt fisso di ogni interazione AI del team. Non dipende dal dev che ricorda di specificarlo, non cambia da persona a persona. L'AI lavora sempre con il contesto completo del progetto.
+
+### Piano di Implementazione
+1. Il team passa il tempo necessario (1–2 settimane) a documentare le regole implicite della codebase nel primo `global-context.md`: error logging, best practices, design system, pattern comuni, naming conventions, security.
+2. Uno script nella CI mantiene il file sincronizzato con l'evoluzione del codice senza effort manuale, rigenerando automaticamente il file ad ogni merge su main.
+3. Il file viene configurato come system prompt obbligatorio su tutti i tool AI del team: skills su Claude, rules su Cursor, system prompt fisso ovunque.
+
+### Business Impact
+I dev interni o esterni leggono un documento invece di fare shadowing. I senior fanno code review che è più una validazione che un'ispezione alla ricerca di capire cosa stanno guardando.
+
+### Toolchain
+- Repomix (non lo so, l'ho cercato online, non è il mio campo)
+- WebHook di Bitbucket (come sopra, potrebbe essere l'equivalente delle github actions)
+- `global-context.md` (versionato in git)
