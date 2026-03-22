@@ -3,6 +3,20 @@
 
 ---
 
+## Premessa
+**Non stiamo descrivendo il futuro. Stiamo cercando di costruirlo prima degli altri.**
+
+> *Chi sperimenta oggi governa domani.*
+
+Ogni mattina il mondo dell'AI è diverso da quello della sera prima. Nuovi modelli, nuovi paradigmi, nuovi tool che ribaltano quello che era valido 48 ore fa. Non è un'esagerazione: è la velocità reale a cui si muove questa tecnologia. Negli Stati Uniti i team più avanzati stanno già sperimentando modi strutturati di governare l'AI nel lavoro quotidiano. Noi possiamo seguire quell'onda adesso, o aspettare che arrivi e inseguirla.
+
+Quello che vedrete nelle prossime slide non è un processo da seguire alla lettera. È una prima bozza, un tentativo concreto di ipotizzare come potremmo sfruttare la forza dell'AI per lavorare in modo più strutturato e meno frustrante. Può essere semplificata, stravolta, migliorata. Anzi, deve esserlo.
+
+### Business Impact
+Abbiamo bisogno di tutti per costruire qualcosa che vada bene a tutti. Questa è una conversazione, non una presentazione. Cavalchiamo insieme questa rivoluzione: nessuno sa esattamente dove porta, ma è molto meglio arrivarci come team che arrivarci da soli.
+
+---
+
 ## 00. Il punto di partenza
 **Un processo, non tools a caso.**
 
@@ -197,6 +211,7 @@ Il valore più sottovalutato è la prevedibilità. Quando gli sprint vengono ris
 ### Business Impact
 Un team che opera con fasi chiare, AI governata e specifiche validate delivera meglio. L'IT diventa un asset pianificabile, non una variabile da gestire.
 
+### Extra
 Può diventare, se funziona, un caso di successo da raccontare a livello di comunicazione aziendale, un gancio potente per raccontare un'azienda che guarda avanti, che sfrutta questa rivoluzione chiamata AI per essere tra le prime del settore in Italia ad entrarci a 360 gradi nei processi di delivery interni.
 
 ### Toolchain
@@ -249,3 +264,121 @@ I dev interni o esterni leggono un documento invece di fare shadowing. I senior 
 - Repomix (non lo so, l'ho cercato online, non è il mio campo)
 - WebHook di Bitbucket (come sopra, potrebbe essere l'equivalente delle github actions)
 - `global-context.md` (versionato in git)
+
+---
+
+---
+
+# VERSIONE PITCH
+
+> Testi sintetici per la presentazione live. Ogni slide ha una domanda aperta per guidare la discussione, e due o tre punti chiave come filo del discorso.
+
+---
+
+## Premessa — PITCH
+
+**Domanda:** Siamo pronti a essere pionieri, o aspettiamo che qualcun altro ci dica come si fa?
+
+- L'AI cambia ogni giorno. Chi sperimenta oggi governa domani.
+- Quello che segue non è un processo da seguire — è una bozza da costruire insieme.
+- Abbiamo bisogno di tutti: costruiamo qualcosa che ci faccia lavorare bene domani.
+
+---
+
+## 00. Il punto di partenza — PITCH
+
+**Domanda:** L'AI che usiamo oggi accelera il nostro processo o accelera il caos?
+
+- L'AI amplifica quello che trova: processo solido → più veloce; caos → più caos.
+- Il problema non è mai il tool. È l'assenza di un processo.
+- L'obiettivo non è fare di più: è fare le cose giuste, in modo prevedibile.
+
+---
+
+## 01. L'idea di processo — PITCH
+
+**Domanda:** Quando un developer inizia a sviluppare, ha già tutto quello che gli serve o deve ancora cercarlo?
+
+- 7 fasi, 1 output concreto per ognuna. Nessun passaggio di consegne a voce.
+- La feature non avanza se la fase precedente non ha prodotto il suo output.
+- Business e IT parlano la stessa lingua perché il processo è l'accordo operativo tra loro.
+
+---
+
+## 02. Processo E2E — PITCH
+
+**Domanda:** Quanti di questi 7 step esistono già nel nostro processo, e quanti vivono solo nelle email?
+
+- Richiesta → Triage → Discovery → Planning → Development → Demo → Live.
+- Ogni fase ha un owner, un artefatto e un tag Git. Tracciabilità totale.
+- Nessuno sviluppa senza un prototipo approvato. Nessun deploy senza demo andata a buon fine.
+
+---
+
+## 03. Richiesta e Triage — PITCH
+
+**Domanda:** Quante richieste arrivano oggi via Slack, email, o a voce nei corridoi?
+
+- Un solo entry point: il portale. Se non passa da lì, non esiste.
+- Il form ha campi obbligatori: problema, utenti impattati, obiettivo, urgenza. Non si invia se incompleto.
+- Solo le richieste che superano il triage del Product Director entrano in backlog.
+
+---
+
+## 04. Discovery & Prototipazione — PITCH
+
+**Domanda:** Il business oggi approva un documento da immaginare o qualcosa che può cliccare?
+
+- Il PM usa Claude per generare un prototipo navigabile prima che un developer scriva una riga di codice.
+- Il prototipo approvato diventa il Contratto Visivo: il riferimento unico e immutabile per tutto il team.
+- I rework da requisiti fraintesi diventano strutturalmente molto improbabili.
+
+---
+
+## 05. Spec-Driven Development — PITCH
+
+**Domanda:** Quanto tempo perde oggi un developer a capire cosa deve fare invece di farlo?
+
+- Il developer osserva, capisce e prende decisioni architetturali. L'AI costruisce.
+- Lo SDD è il meccanismo che rende il codice AI-generated verificabile, non ambiguo.
+- Il team scala la capacità produttiva senza aggiungere persone.
+
+---
+
+## 06. Il Progetto pilota — PITCH
+
+**Domanda:** Come dimostriamo che funziona prima di chiedere a tutta l'organizzazione di cambiare?
+
+- 6 settimane, 4-5 persone, una feature reale. Processo completo tracciato in ogni fase.
+- L'obiettivo non è la perfezione: è il delta misurabile rispetto a come lavoriamo oggi.
+- Al termine i dati parlano da soli: la decisione di scalare diventa ovvia o informata.
+
+---
+
+## 07. Il ROI Atteso — PITCH
+
+**Domanda:** Quanto vale per il business avere un IT che diventa un partner pianificabile invece di una variabile da gestire?
+
+- Meno rework. Sprint rispettati. Stime affidabili.
+- L'IT smette di essere la variabile imprevedibile del piano.
+- Extra: potenziale caso di successo da raccontare. Un'azienda che ha scelto di guidare questa transizione, non di subirla.
+
+---
+
+## 08. AI Governance — PITCH
+
+**Domanda:** L'AI che usiamo conosce le nostre regole, o le inventa ogni volta da capo?
+
+- Vogliamo che tutti usino l'AI con lo stesso contesto: architettura, convenzioni, regole di sicurezza.
+- Non si ottiene con la disciplina individuale. Si ottiene con un metodo condiviso.
+- La qualità diventa strutturale, non personale.
+
+---
+
+## 09. Context as Code — PITCH
+
+**Domanda:** Come facciamo in modo che tutta l'AI del team parli sempre la stessa lingua?
+
+- `global-context.md`: un file Markdown versionato in Git con tutto il contesto della codebase.
+- La CI lo rigenera automaticamente ad ogni merge. Sempre aggiornato, zero effort manuale.
+- Diventa il system prompt fisso su tutti i tool AI del team. Un documento, nessun setup individuale.
